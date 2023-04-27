@@ -2,22 +2,25 @@ import tkinter as tk
 
 expression = ""
 
+#Function to update the Expression field when a button is pressed
 def press(num):
     global expression
     expression = expression + str(num)
     equation.set(expression)
 
+#Function to carry out the expression in the Expression field
 def equalpress():
     try:
         global expression
         total = str(eval(expression))
         equation.set(total)
         expression = ""
-
+#In case of error (zero division etc.)
     except:
         equation.set(" error ")
         expression = ""
 
+#Clear the expression field
 def clearField():
     global expression
     expression = ""
@@ -30,10 +33,14 @@ if __name__ == "__main__":
     gui.title("Simple Calculator")
     gui.geometry("270x150")
 
+
+#StringVar class is used to treat expressions as an equation object
     equation = tk.StringVar()
     expression_field = tk.Entry(gui, textvariable=equation)
     expression_field.grid(columnspan=4, ipadx=70)
     
+    
+#Buttons are configured and arranged in a grid format
     button1 = tk.Button(gui, text = '1', fg = 'grey', bg = 'white',
                          command=lambda: press(1), height=1, width=7)
     button1.grid(row=2, column=0)
